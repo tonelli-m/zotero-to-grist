@@ -26,4 +26,4 @@ jobs:
                   GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
                   GRIST_DOC_ID: ${{ secrets.GRIST_DOC_ID }}
                   GRIST_TABLE_ID: ${{ secrets.GRIST_TABLE_ID }}
-              run: pycheck -vv -s tests
+              run: pytest -vv -s tests
