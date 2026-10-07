@@ -35,3 +35,26 @@ python -m zotero2grist \
     --grist-doc-id="doc_id" \ # can be found in the document's settings page
     --grist-table-id="table_id" # can be found in the Raw data page of the Grist document
 ```
+
+
+### Format
+
+The output columns are the following:
+
+| Column name           | Description |
+| --------------------- | ----------- |
+| Annee                 | Year (4 digits) |
+| Type_de_publication   | Publication type abbreviated |
+| Nombre_items          | Total number of publications in this type for this year |
+| Nombre_Cerema         | Number of publications with the "Cerema" tag |
+| Nombre_Uni_Eiffel     | Number of publications with the "Uni Eiffel" tag |
+| Zotero_Key            | Zotero key for this sub collection |
+
+Currently editing the formatting of the columns is not possible other than modifying the source code.
+
+
+## Github actions setup
+
+The Github action workflow in `.github/workflows/` is configured to run this script on **every Monday morning at 06:00 UTC**. API keys and other credentials are passed via [Github secrets](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
+
+The value of each parameter must be stored in a secret corresponding to its name in uppercase letters. For instance `--zotero-api-key` value should be stored in the `ZOTERO_API_KEY` secret.

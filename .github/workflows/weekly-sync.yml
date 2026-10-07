@@ -1,0 +1,38 @@
+name: Run zotero2grist
+
+on:
+    schedule:
+        # Every Monday at 06:00 UTC
+        - cron: "0 6 * * 1"
+    # Allow manual runs from the Actions tab
+    workflow_dispatch:
+
+jobs:
+    run-zotero2grist:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.13"
+
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+
+            - name: Run zotero2grist
+              env:
+                  ZOTERO_API_KEY: ${{ secrets.ZOTERO_API_KEY }}
+                  ZOTERO_GROUP_ID: ${{ secrets.ZOTERO_GROUP_ID }}
+                  GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
+                  GRIST_DOC_ID: ${{ secrets.GRIST_DOC_ID }}
+                  GRIST_TABLE_ID: ${{ secrets.GRIST_TABLE_ID }}
+              run: |
+                  python -m zotero2grist \
+                    --zotero-api-key "$ZOTERO_API_KEY" \
+                    --zotero-group-id "$ZOTERO_GROUP_ID" \
+                    --grist-api-key "$GRIST_API_KEY" \
+                    --grist-doc-id "$GRIST_DOC_ID" \
+                    --grist-table-id "$GRIST_TABLE_ID"
