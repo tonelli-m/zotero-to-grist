@@ -164,7 +164,9 @@ def update_table(
         for r in input_data
         if r["Zotero_Key"] in existing_records
     ]
-    if _update_grist_records(
+    if len(records_to_update) == 0:
+        LOG.warning("0 new records to update.")
+    elif _update_grist_records(
         api_key,
         doc_id,
         table_id,
@@ -176,7 +178,9 @@ def update_table(
     records_to_create = [
         {"fields": r} for r in input_data if r["Zotero_Key"] not in existing_records
     ]
-    if _create_grist_records(
+    if len(records_to_create) == 0:
+        LOG.warning("0 new records to create.")
+    elif _create_grist_records(
         api_key,
         doc_id,
         table_id,
