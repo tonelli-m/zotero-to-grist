@@ -27,4 +27,4 @@ def test_grist_connection() -> int:
         doc_id=GRIST_DOC_ID,
         table_id=GRIST_TABLE_ID,
     )
-    assert records is None or len(records) == 0
+    assert records is not None or len(records) == 0
