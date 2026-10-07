@@ -189,6 +189,9 @@ def parse_publications(
         return []
     LOG.info("Found %d yearly collections.", len(collections))
 
+    # FOR TESTING PURPOSE
+    collections = [collections[1]]
+
     for index, collection in enumerate(collections):
         year = int(str(collection["name"]).removeprefix("Année "))
 

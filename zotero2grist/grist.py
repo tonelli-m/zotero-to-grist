@@ -33,7 +33,6 @@ def _fetch_existing_records(
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
-    LOG.info(headers)
     response = requests.get(url, headers=headers, timeout=60)
 
     if response.status_code != 200:
